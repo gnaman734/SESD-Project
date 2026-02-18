@@ -245,4 +245,4 @@ Tamper-proof log of all data mutations performed by admin users. Records the act
 - **Denormalized stats on INSTRUCTORS** — `total_duties`, `on_time_count`, and `late_count` are stored directly on the INSTRUCTORS table for fast profile queries, and kept in sync via triggers.
 - **ANALYTICS_CACHE separation** — Workload intelligence metrics (variance, workload status) are isolated in a dedicated cache table, updated by trigger, so the admin dashboard never blocks on expensive aggregation queries.
 - **JSONB for audit snapshots** — Before/after states stored as JSONB allow the audit log to capture any entity without schema changes.
-- **RLS enforcement** — Row Level Security policies use the `role` field in USERS to gate access: instructors can only SELECT/UPDATE their own DUTIES rows; admins have unrestricted access.
+- **RLS enforcement** — Row Level Security policies use the `role` field in USERS to gate access: instructors can only SELECT/UPDATE their own DUTIES rows; admins have unrestricted access. 
