@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Instructor Dashboard | IIMS Registrar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#d3e4fe",
+                      "outline-variant": "#c6c5d4",
+                      "surface": "#f8f9ff",
+                      "outline": "#767683",
+                      "on-primary-fixed": "#000c62",
+                      "secondary-fixed": "#d5e3fc",
+                      "on-secondary-container": "#57657a",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "secondary-container": "#d5e3fc",
+                      "on-background": "#0b1c30",
+                      "error": "#ba1a1a",
+                      "on-primary-container": "#9aa5ff",
+                      "primary-fixed-dim": "#bcc2ff",
+                      "inverse-surface": "#213145",
+                      "on-surface": "#0b1c30",
+                      "error-container": "#ffdad6",
+                      "secondary": "#515f74",
+                      "tertiary-container": "#384055",
+                      "on-secondary-fixed-variant": "#3a485b",
+                      "surface-tint": "#4955b3",
+                      "surface-bright": "#f8f9ff",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#cbdbf5",
+                      "primary-fixed": "#dfe0ff",
+                      "on-primary-fixed-variant": "#303c9a",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#0b1a7d",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary-fixed": "#131b2e",
+                      "surface-container-low": "#eff4ff",
+                      "on-tertiary-container": "#a4acc5",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#dae2fd",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "inverse-primary": "#bcc2ff",
+                      "surface-container": "#e5eeff",
+                      "on-tertiary-fixed-variant": "#3f465c",
+                      "on-surface-variant": "#454652",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary": "#222a3e",
+                      "background": "#f8f9ff",
+                      "primary-container": "#283593",
+                      "tertiary-fixed-dim": "#bec6e0"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Inter"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .shadow-soft { box-shadow: 0 24px 48px -12px rgba(11, 28, 48, 0.08); }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #0b1a7d 0%, #283593 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<header class="bg-indigo-50/80 dark:bg-slate-950/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none flex justify-between items-center w-full px-8 py-3">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-indigo-900 dark:text-indigo-50 font-sans antialiased tracking-tight">IIMS Registrar</span>
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-4 py-1.5 gap-2">
+<span class="material-symbols-outlined text-outline text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface-variant w-64 placeholder:text-outline-variant" placeholder="Search duties or venues..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full bg-indigo-200 overflow-hidden ring-2 ring-indigo-100 ring-offset-2">
+<img alt="Administrator profile avatar" class="w-full h-full object-cover" data-alt="Close up portrait of a professional academic instructor with a friendly expression in a modern bright office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEzdTmWKroPjo6hDY7ZZcqpZARHtwBMOEVEsgndwmIs_DEmRlmarZfOSawUuVvqGIS1DKb87VoSz2aZDd0dz5Y2kd3_FLlBlA00Xv7mxUfhpH4Y5kJiPpEHe8JW_GaKyV1vff4pa7xj6tZWlnb21pVv9RiDU4tNrYuQqls37PYminIoMo7r0TjDLk2Mo1RvbrcpkANeDY1CyYOFQC7bfO0PdiP3qBuW52mnIoXOIiUdfTDdJbiSd9bwu2od2MJMknmsT5kdKI6pG3t"/>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- Side Navigation Bar -->
+<aside class="bg-slate-100 dark:bg-slate-900 h-screen w-64 fixed left-0 top-0 flex flex-col pt-20">
+<div class="px-8 mb-10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-xl bg-indigo-900 flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div>
+<h2 class="font-black text-indigo-900 dark:text-white uppercase tracking-widest text-xs">IIMS Admin</h2>
+<p class="text-[10px] text-slate-500 uppercase tracking-tighter">Institutional Clarity</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col h-full py-2 overflow-y-auto font-sans text-sm tracking-wide">
+<!-- Dashboard Active State -->
+<a class="bg-white dark:bg-indigo-950 text-indigo-900 dark:text-indigo-100 font-bold rounded-l-full ml-4 pl-4 py-3 shadow-soft flex items-center gap-3 translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_ind">assignment_ind</span>
+<span>Duties</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Instructors</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Exams</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+<span>Rooms</span>
+</a>
+<div class="mt-auto px-8 pb-8 space-y-4">
+<button class="w-full primary-gradient text-on-primary py-3 rounded-xl font-bold shadow-soft active:scale-[0.98] transition-transform text-xs tracking-widest uppercase">
+                        New Examination
+                    </button>
+<div class="pt-4 space-y-1">
+<a class="flex items-center gap-3 text-slate-500 hover:text-indigo-700 py-2" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-xs font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 hover:text-error py-2" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="logout">logout</span>
+<span class="text-xs font-medium">Sign Out</span>
+</a>
+</div>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 min-h-screen p-12">
+<!-- Header Section -->
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2">Instructor Overview</h1>
+<p class="text-on-surface-variant font-medium">Welcome back, Dr. Julian Vance. You have 2 duties today.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-low px-6 py-4 rounded-xl text-center">
+<span class="block text-2xl font-black text-indigo-900 leading-none">98.2%</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Punctuality Rate</span>
+</div>
+<div class="bg-surface-container-low px-6 py-4 rounded-xl text-center">
+<span class="block text-2xl font-black text-indigo-900 leading-none">142</span>
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Total Duties</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Primary Action Card: Mark Arrival -->
+<section class="col-span-12 lg:col-span-8">
+<div class="relative overflow-hidden rounded-2xl bg-indigo-900 text-white p-8 h-full shadow-soft flex flex-col justify-between">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl"></div>
+<div class="z-10">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 rounded-full bg-white/10 text-[10px] font-bold tracking-widest uppercase">Ongoing Session</span>
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+</div>
+<h3 class="text-3xl font-bold mb-2">CS-402: Quantum Algorithms</h3>
+<p class="text-indigo-200 text-lg mb-8 max-w-md">Reporting time was 08:30 AM at Main Hall South Wing. Please confirm your presence.</p>
+</div>
+<div class="z-10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-white/10 p-3 rounded-xl flex flex-col items-center min-w-[80px]">
+<span class="text-[10px] font-medium opacity-60">Venue</span>
+<span class="font-bold">Hall B2</span>
+</div>
+<div class="bg-white/10 p-3 rounded-xl flex flex-col items-center min-w-[80px]">
+<span class="text-[10px] font-medium opacity-60">Time</span>
+<span class="font-bold">08:45 AM</span>
+</div>
+</div>
+<button class="bg-white text-indigo-900 px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-xl active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                Mark Arrival
+                            </button>
+</div>
+</div>
+</section>
+<!-- Status Stats -->
+<section class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-soft">
+<h4 class="text-xs font-black uppercase tracking-widest text-outline mb-6">Duty Status Distribution</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Confirmed</span>
+<span class="text-on-surface-variant">88%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-indigo-600 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Pending Response</span>
+<span class="text-on-surface-variant">12%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-amber-400 rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-2xl border border-white/50">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-[10px] font-black uppercase tracking-widest text-on-secondary-container mb-1">Upcoming This Week</p>
+<p class="text-3xl font-black text-indigo-950">08</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-indigo-900">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+</div>
+<p class="mt-4 text-xs text-on-secondary-container font-medium">Next: Thursday, Oct 24th at Lab 04.</p>
+</div>
+</section>
+<!-- Duties Table/List -->
+<section class="col-span-12">
+<div class="bg-surface-container-lowest rounded-3xl p-10 shadow-soft">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-2xl font-extrabold tracking-tight">Recent &amp; Upcoming Duties</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface text-xs font-bold rounded-lg text-indigo-900">Upcoming</button>
+<button class="px-4 py-2 hover:bg-surface text-xs font-bold rounded-lg text-outline">Past</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="border-b-0">
+<tr class="text-[10px] font-black uppercase tracking-widest text-outline">
+<th class="pb-6 pl-4">Duty ID</th>
+<th class="pb-6">Examination Title</th>
+<th class="pb-6">Reporting Time</th>
+<th class="pb-6">Venue</th>
+<th class="pb-6">Status</th>
+<th class="pb-6 pr-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-colors rounded-xl">
+<td class="py-5 pl-4 font-mono text-outline">#EX-9041</td>
+<td class="py-5">
+<div class="font-bold text-on-surface">Advanced Microeconomics</div>
+<div class="text-xs text-on-surface-variant font-medium">EC-502 • Final Session</div>
+</td>
+<td class="py-5">
+<span class="font-medium">09:00 AM</span>
+<span class="block text-[10px] text-outline">Oct 24, 2023</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">meeting_room</span>
+<span class="font-medium">Conference Hall C</span>
+</div>
+</td>
+<td class="py-5">
+<span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
+</td>
+<td class="py-5 pr-4 text-right">
+<button class="text-indigo-600 font-bold text-xs hover:underline">View Details</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 pl-4 font-mono text-outline">#EX-9042</td>
+<td class="py-5">
+<div class="font-bold text-on-surface">Data Structures &amp; Algorithms</div>
+<div class="text-xs text-on-surface-variant font-medium">CS-201 • Mid-Term</div>
+</td>
+<td class="py-5">
+<span class="font-medium">01:30 PM</span>
+<span class="block text-[10px] text-outline">Oct 24, 2023</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">meeting_room</span>
+<span class="font-medium">Main Auditorium</span>
+</div>
+</td>
+<td class="py-5">
+<span class="px-3 py-1 rounded-full bg-amber-50 text-amber-600 text-[10px] font-bold uppercase tracking-wider">Pending</span>
+</td>
+<td class="py-5 pr-4 text-right">
+<button class="text-indigo-600 font-bold text-xs hover:underline">Accept Duty</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-5 pl-4 font-mono text-outline">#EX-8920</td>
+<td class="py-5">
+<div class="font-bold text-on-surface">Organic Chemistry III</div>
+<div class="text-xs text-on-surface-variant font-medium">CH-312 • Final Session</div>
+</td>
+<td class="py-5">
+<span class="font-medium">08:00 AM</span>
+<span class="block text-[10px] text-outline">Oct 23, 2023</span>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-lg">meeting_room</span>
+<span class="font-medium">Lab Wing 04</span>
+</div>
+</td>
+<td class="py-5">
+<span class="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">Arrived</span>
+</td>
+<td class="py-5 pr-4 text-right">
+<span class="text-outline-variant italic text-xs">Logged</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-16 pt-8 border-t border-indigo-100 flex justify-between text-[10px] font-bold uppercase tracking-widest text-outline">
+<div>© 2023 IIMS Registrar • Institutional Information Management System</div>
+<div class="flex gap-6">
+<a class="hover:text-indigo-600" href="#">Confidentiality Agreement</a>
+<a class="hover:text-indigo-600" href="#">Report Discrepancy</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 opacity-30 pointer-events-none">
+<div class="w-[800px] h-[800px] bg-gradient-to-br from-indigo-100 to-transparent rounded-full -translate-y-1/2 translate-x-1/4 blur-[120px]"></div>
+</div>
+</body></html>

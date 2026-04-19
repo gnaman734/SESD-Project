@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Instructor Profile - IIMS Registrar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#d3e4fe",
+                        "outline-variant": "#c6c5d4",
+                        "surface": "#f8f9ff",
+                        "outline": "#767683",
+                        "on-primary-fixed": "#000c62",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-secondary-container": "#57657a",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "secondary-container": "#d5e3fc",
+                        "on-background": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#9aa5ff",
+                        "primary-fixed-dim": "#bcc2ff",
+                        "inverse-surface": "#213145",
+                        "on-surface": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "secondary": "#515f74",
+                        "tertiary-container": "#384055",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "surface-tint": "#4955b3",
+                        "surface-bright": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed": "#dfe0ff",
+                        "on-primary-fixed-variant": "#303c9a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#0b1a7d",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#131b2e",
+                        "surface-container-low": "#eff4ff",
+                        "on-tertiary-container": "#a4acc5",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "inverse-primary": "#bcc2ff",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "on-surface-variant": "#454652",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary": "#222a3e",
+                        "background": "#f8f9ff",
+                        "primary-container": "#283593",
+                        "tertiary-fixed-dim": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); }
+        .shadow-soft { box-shadow: 0 24px 48px -12px rgba(11, 28, 48, 0.08); }
+        .primary-gradient { background: linear-gradient(135deg, #0b1a7d 0%, #283593 100%); }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-slate-100 dark:bg-slate-900 border-none z-40">
+<div class="flex flex-col h-full py-8 overflow-y-auto">
+<div class="px-8 mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl primary-gradient flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="font-black text-indigo-900 dark:text-white uppercase tracking-widest text-sm">IIMS Admin</h1>
+<p class="text-[10px] text-slate-500 font-medium tracking-tight">Institutional Clarity</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 flex items-center gap-4 transition-all hover:bg-slate-200/50" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-sans text-sm tracking-wide">Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 flex items-center gap-4 transition-all hover:bg-slate-200/50" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-sans text-sm tracking-wide">Duties</span>
+</a>
+<!-- Active Tab: Instructors -->
+<a class="bg-white dark:bg-indigo-950 text-indigo-900 dark:text-indigo-100 font-bold rounded-l-full ml-4 pl-4 py-3 shadow-soft flex items-center gap-4 translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-sans text-sm tracking-wide">Instructors</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 flex items-center gap-4 transition-all hover:bg-slate-200/50" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-sans text-sm tracking-wide">Exams</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 px-8 py-3 flex items-center gap-4 transition-all hover:bg-slate-200/50" href="#">
+<span class="material-symbols-outlined">meeting_room</span>
+<span class="font-sans text-sm tracking-wide">Rooms</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<button class="w-full px-8 py-3 flex items-center gap-4 text-slate-500 hover:text-indigo-700 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-sans text-sm tracking-wide">Settings</span>
+</button>
+<button class="w-full px-8 py-3 flex items-center gap-4 text-slate-500 hover:text-error transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-sans text-sm tracking-wide">Sign Out</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="fixed top-0 right-0 left-64 bg-indigo-50/80 dark:bg-slate-950/80 backdrop-blur-xl z-30 shadow-sm">
+<div class="flex justify-between items-center w-full px-8 py-3">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search instructor records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="text-slate-500 hover:text-indigo-600 transition-colors active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-indigo-600 transition-colors active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-semibold text-indigo-900">Admin Panel</span>
+<img alt="Administrator profile avatar" class="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm" data-alt="Close-up portrait of a professional male administrator in a clean white background with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASORyb10qXfUBauwDqX3tSYbWarC6cw-mkUhM04OmVvlv8FFnx8UbB6YN_y7CWKSC1XRY9SODudNidD9b_fxwbtiPYI-TUb0ZQc1BNi7jvzAvUrjo_Wiq69VZAuaWf6JMEBlR_FfhidGHztmoyJT1b-ZnYjly_h6WKGYSFyQ-9nx2UO8ChoCCP4wzUhkOPdf4uNHbGZMgl9FwRu7nM72Wjz6BowWj9f9IVNejU3BJoGs_Kt1vAcbs8nQphker6Z7Y3FZgLq6T8TXZW"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Profile Header Section -->
+<section class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-8 shadow-soft flex flex-col md:flex-row items-end gap-8">
+<div class="absolute top-0 right-0 p-8">
+<span class="text-[120px] font-black text-slate-100/50 select-none leading-none tracking-tighter">IIMS</span>
+</div>
+<div class="relative z-10">
+<div class="w-32 h-32 rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+<img alt="Instructor Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a female university instructor with glasses, smiling confidently against a blurred library background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq-6GEpOblYrxw0r9Wfc8DoamNbGWI0upVdgaolDf5DxkF1-WkGYvezzRv1PP5IHtWNRvme9Y0wCEmPBki8FNRYN0EgZ3ErtIP9qLaHKGoejDIdwa-GoPLlgkGh5A8bcWfvGTR33ohTjDTF42tF5FkGo6fghWO3pLCHSYBFyRQdDcWAl9SzdgfudAFmm3egWwJbgpKBcnKPh7OooEr9oFdn5BNeB-9gPDspWDJ-bk8KEfLmSfcZ3MuHLJ669DMuW_YNfL0zMJQs__t"/>
+</div>
+</div>
+<div class="relative z-10 flex-1">
+<div class="flex items-center gap-3 mb-1">
+<span class="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded-md">Senior Lecturer</span>
+<span class="px-2 py-1 bg-tertiary-container/30 text-tertiary text-[10px] font-bold uppercase tracking-widest rounded-md">Active</span>
+</div>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2">Dr. Sarah Jenkins</h2>
+<div class="flex flex-wrap gap-x-6 gap-y-2 text-on-surface-variant font-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">school</span>
+<span class="text-sm">Department of Computer Science</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">badge</span>
+<span class="text-sm">EMP-2024-8842</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span>
+<span class="text-sm">s.jenkins@iims-edu.org</span>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex gap-3 pb-2">
+<button class="px-6 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg text-sm hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">edit</span>
+                        Edit Profile
+                    </button>
+<button class="px-6 py-3 primary-gradient text-white font-bold rounded-lg text-sm shadow-md hover:opacity-90 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_add_on</span>
+                        Assign Duty
+                    </button>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Total Duties -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-soft">
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">assignment</span>
+</div>
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Yearly</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Total Duties</p>
+<h3 class="text-3xl font-black text-on-surface tracking-tighter">142</h3>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-green-600 text-[10px] font-bold">+12% vs LY</span>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- On-Time -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-soft">
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-green-700">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Verified</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">On-Time Arrival</p>
+<h3 class="text-3xl font-black text-on-surface tracking-tighter">138</h3>
+<div class="mt-4">
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant mb-1">
+<span>RELIABILITY</span>
+<span>98%</span>
+</div>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-green-600 w-[98%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Late -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-soft">
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-lg bg-error-container/30 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<span class="text-[10px] font-bold text-on-tertiary-container uppercase tracking-widest">Incidents</span>
+</div>
+<p class="text-on-surface-variant text-sm font-medium mb-1">Late Duty Start</p>
+<h3 class="text-3xl font-black text-on-surface tracking-tighter">04</h3>
+<div class="mt-4">
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant mb-1">
+<span>THRESHOLD</span>
+<span>LOW</span>
+</div>
+<div class="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-error w-[15%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Punctuality Rate -->
+<div class="primary-gradient p-6 rounded-xl shadow-lg relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[100px] text-white">analytics</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-4">
+<div class="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center text-white">
+<span class="material-symbols-outlined">star</span>
+</div>
+</div>
+<p class="text-indigo-200 text-sm font-medium mb-1">Punctuality Rate</p>
+<h3 class="text-4xl font-black text-white tracking-tighter">97.2%</h3>
+<p class="mt-4 text-[10px] font-bold text-white/70 uppercase tracking-widest">Performance Tier: ELITE</p>
+</div>
+</div>
+</section>
+<!-- Main Content Area: Trends and Settings -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Performance Trends & History -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-soft">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-xl font-bold tracking-tight text-on-surface">Duty History</h4>
+<p class="text-sm text-on-surface-variant">Recent invigilation engagements</p>
+</div>
+<button class="text-primary text-sm font-bold hover:underline">Download Report</button>
+</div>
+<div class="space-y-4">
+<!-- Table-less List (The Rule of Zero Lines) -->
+<div class="grid grid-cols-12 px-4 py-2 text-[10px] font-black text-on-tertiary-container uppercase tracking-widest">
+<div class="col-span-5">Examination / Course</div>
+<div class="col-span-3">Date &amp; Time</div>
+<div class="col-span-2">Room</div>
+<div class="col-span-2 text-right">Status</div>
+</div>
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-indigo-900 font-bold text-xs">CS</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Advanced Algorithms (CS402)</p>
+<p class="text-xs text-on-surface-variant">Main Hall • Level 4</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface font-medium">Oct 24, 2024</p>
+<p class="text-xs text-on-surface-variant">09:00 - 12:00</p>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface">R-102</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 bg-green-50 text-green-700 text-[10px] font-bold rounded uppercase">Completed</span>
+</div>
+</div>
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-indigo-900 font-bold text-xs">MA</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Discrete Mathematics (MA101)</p>
+<p class="text-xs text-on-surface-variant">Auditorium B</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface font-medium">Oct 22, 2024</p>
+<p class="text-xs text-on-surface-variant">14:00 - 17:00</p>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface">AUD-B</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 bg-green-50 text-green-700 text-[10px] font-bold rounded uppercase">Completed</span>
+</div>
+</div>
+<div class="grid grid-cols-12 items-center px-4 py-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="col-span-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high flex items-center justify-center text-indigo-900 font-bold text-xs">CS</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Introduction to AI (CS205)</p>
+<p class="text-xs text-on-surface-variant">Computer Lab 3</p>
+</div>
+</div>
+<div class="col-span-3">
+<p class="text-sm text-on-surface font-medium">Oct 18, 2024</p>
+<p class="text-xs text-on-surface-variant">10:00 - 13:00</p>
+</div>
+<div class="col-span-2">
+<span class="text-sm font-medium text-on-surface">L-303</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="px-2 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold rounded uppercase">Late (5m)</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-100 flex justify-center">
+<button class="text-on-surface-variant text-xs font-bold uppercase tracking-widest hover:text-primary flex items-center gap-2">
+                                View Full History
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Personal Information & Settings -->
+<div class="space-y-6">
+<div class="bg-surface-container-low rounded-xl p-8 shadow-sm">
+<h4 class="text-lg font-bold tracking-tight text-on-surface mb-6">Personal Information</h4>
+<div class="space-y-6">
+<div>
+<label class="block text-[10px] font-black text-on-tertiary-container uppercase tracking-widest mb-2">Office Room</label>
+<div class="p-3 bg-surface-container-lowest rounded-lg text-sm text-on-surface font-medium shadow-sm flex justify-between items-center">
+<span>Block C, Room 402</span>
+<span class="material-symbols-outlined text-sm text-slate-300">lock</span>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-black text-on-tertiary-container uppercase tracking-widest mb-2">Phone Extension</label>
+<div class="p-3 bg-surface-container-lowest rounded-lg text-sm text-on-surface font-medium shadow-sm flex justify-between items-center">
+<span>+1 (555) 482-990</span>
+<button class="material-symbols-outlined text-sm text-primary">edit</button>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-black text-on-tertiary-container uppercase tracking-widest mb-2">Duty Preference</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-white rounded-full text-xs font-semibold text-on-surface shadow-sm border border-slate-100">Morning Slot</span>
+<span class="px-3 py-1 bg-white rounded-full text-xs font-semibold text-on-surface shadow-sm border border-slate-100">Theory Exams</span>
+<span class="px-3 py-1 bg-indigo-50 rounded-full text-xs font-semibold text-indigo-700 shadow-sm border border-indigo-100">No Saturdays</span>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full py-3 bg-surface-container-highest text-primary font-bold rounded-lg text-xs uppercase tracking-widest hover:bg-indigo-100 transition-colors">
+                                    Update Security Clearance
+                                </button>
+</div>
+</div>
+</div>
+<div class="bg-primary-container p-6 rounded-xl shadow-soft relative overflow-hidden">
+<div class="relative z-10 text-white">
+<h5 class="font-bold text-sm mb-2">Instructor Support</h5>
+<p class="text-xs text-indigo-200 mb-4 leading-relaxed">Need help with your examination schedule or have a conflict? Contact the registrar office directly.</p>
+<button class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[10px] font-bold uppercase tracking-widest backdrop-blur-md transition-all">
+                                Request Schedule Change
+                            </button>
+</div>
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-4xl">support_agent</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Anchor (Contextual for Home/Dashboard, but hidden on Profile as per prompt mandate) -->
+<!-- [SUPPRESSED PER UX GOAL] -->
+</body></html>
