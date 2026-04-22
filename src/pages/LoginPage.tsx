@@ -5,6 +5,7 @@ import { UserRole } from "../types/domain";
 
 const LoginPage = () => {
   const login = useAuthStore((state: AuthState) => state.login);
+  const setUser = useAuthStore((state: AuthState) => state.setUser);
   const role = useAuthStore((state: AuthState) => state.role);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,33 @@ const LoginPage = () => {
     } catch (err) {
       setError((err as Error).message);
     }
+  };
+
+  const handleDemoLogin = (demoRole: UserRole) => {
+    setError(null);
+    const createdAt = new Date().toISOString();
+    if (demoRole === UserRole.ADMIN) {
+      setUser({
+        id: "demo-admin",
+        email: "admin.demo@iims.local",
+        full_name: "Demo Admin",
+        role: UserRole.ADMIN,
+        instructor_id: null,
+        created_at: createdAt,
+      });
+      navigate("/admin");
+      return;
+    }
+
+    setUser({
+      id: "demo-instructor",
+      email: "instructor.demo@iims.local",
+      full_name: "Demo Instructor",
+      role: UserRole.INSTRUCTOR,
+      instructor_id: null,
+      created_at: createdAt,
+    });
+    navigate("/instructor");
   };
 
   return (
@@ -113,6 +141,22 @@ const LoginPage = () => {
               >
                 Login to Dashboard
               </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <button
+                  className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
+                  onClick={() => handleDemoLogin(UserRole.INSTRUCTOR)}
+                  type="button"
+                >
+                  Demo as Instructor
+                </button>
+                <button
+                  className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
+                  onClick={() => handleDemoLogin(UserRole.ADMIN)}
+                  type="button"
+                >
+                  Demo as Admin
+                </button>
+              </div>
             </form>
             <div className="mt-10 pt-8 border-t border-outline-variant/15 text-center">
               <p className="text-sm text-on-surface-variant font-medium">

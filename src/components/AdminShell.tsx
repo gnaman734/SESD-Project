@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthState, useAuthStore } from "../stores/authStore";
 
 type AdminShellProps = {
@@ -8,6 +8,13 @@ type AdminShellProps = {
 
 const AdminShell = ({ children }: AdminShellProps) => {
   const user = useAuthStore((state: AuthState) => state.user);
+  const logout = useAuthStore((state: AuthState) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div className="bg-surface text-on-surface antialiased min-h-screen flex">
@@ -68,7 +75,11 @@ const AdminShell = ({ children }: AdminShellProps) => {
               <span className="material-symbols-outlined">settings</span>
               <span className="font-sans text-sm tracking-wide">Settings</span>
             </button>
-            <button className="flex items-center gap-4 text-slate-500 hover:text-error px-8 py-3 transition-all hover:bg-surface-container-low">
+            <button
+              className="flex items-center gap-4 text-slate-500 hover:text-error px-8 py-3 transition-all hover:bg-surface-container-low"
+              onClick={handleLogout}
+              type="button"
+            >
               <span className="material-symbols-outlined">logout</span>
               <span className="font-sans text-sm tracking-wide">Sign Out</span>
             </button>

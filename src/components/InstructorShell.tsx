@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthState, useAuthStore } from "../stores/authStore";
 
 type InstructorShellProps = {
@@ -8,6 +8,13 @@ type InstructorShellProps = {
 
 const InstructorShell = ({ children }: InstructorShellProps) => {
   const user = useAuthStore((state: AuthState) => state.user);
+  const logout = useAuthStore((state: AuthState) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div className="bg-surface text-on-surface antialiased min-h-screen">
@@ -70,6 +77,14 @@ const InstructorShell = ({ children }: InstructorShellProps) => {
             <div className="text-xs font-semibold text-slate-500">
               {user?.full_name ?? "Instructor"}
             </div>
+            <button
+              className="text-slate-500 hover:text-error transition-all flex items-center gap-3 text-sm"
+              onClick={handleLogout}
+              type="button"
+            >
+              <span className="material-symbols-outlined">logout</span>
+              <span>Sign Out</span>
+            </button>
           </div>
         </aside>
         <main className="ml-64 flex-1 min-h-screen p-12">{children}</main>

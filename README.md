@@ -12,6 +12,12 @@ This workspace now includes a runnable front-end scaffold for the Intelligent In
 - **Sequencediagram.md**: Details the sequence of interactions in the system.
 - **Usecasediagram.md**: Describes the use cases and their interactions.
 - **idea.md**: A document outlining the initial ideas and concepts for the project.
+- **document/**: Organized submission-ready documentation files:
+  - `addIdea.md`
+  - `Sequence Diagram.md`
+  - `Class Diagram.md`
+  - `Use Case Diagram.md`
+  - `ER Diagram.md`
 - **LICENSE**: The license file for the project.
 - **src/**: React + TypeScript front-end scaffold.
 - **supabase/schema.sql**: Database schema, triggers, and RLS policies.
@@ -28,9 +34,17 @@ This workspace now includes a runnable front-end scaffold for the Intelligent In
 3. Open the relevant files to explore the diagrams and documentation.
 
 ### Run the front-end
-1. Install dependencies.
-2. Copy `.env.example` to `.env` and set Supabase keys.
-3. Start the dev server.
+1. Install dependencies: `npm install`
+2. Copy `.env.example` to `.env` and set:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_ENABLE_DEMO_LOGIN` (`false` for production)
+3. Start the dev server: `npm run dev`
+
+### Production build
+1. Run `npm run build`
+2. Deploy the generated `dist/` folder.
+3. For Vercel, keep `vercel.json` in the repo so SPA routes rewrite to `index.html`.
 
 ### Sign up
 Use the Sign up link on the login screen to create instructor or admin accounts. Instructor sign-up will also create a linked instructor profile.
