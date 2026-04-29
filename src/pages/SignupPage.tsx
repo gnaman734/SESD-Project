@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthService } from "../services/authService";
 import { UserRole } from "../types/domain";
+import { appEnv } from "../config/env";
 
 const SignupPage = () => {
   const [fullName, setFullName] = useState("");
@@ -17,6 +18,10 @@ const SignupPage = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (!appEnv.isSupabaseConfigured) {
+      setError(appEnv.supabaseConfigurationMessage);
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -216,9 +221,15 @@ const SignupPage = () => {
                 </label>
               </div>
               {error && <p className="text-xs text-error">{error}</p>}
+              {!appEnv.isSupabaseConfigured ? (
+                <p className="text-xs text-on-surface-variant">
+                  Account creation is disabled until Supabase environment variables are configured.
+                </p>
+              ) : null}
               <div className="space-y-4 pt-4">
                 <button
-                  className="primary-gradient w-full py-4 rounded-lg text-on-primary font-bold text-sm shadow-lg hover:shadow-primary/20 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                  className="primary-gradient w-full py-4 rounded-lg text-on-primary font-bold text-sm shadow-lg hover:shadow-primary/20 hover:scale-[1.01] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={!appEnv.isSupabaseConfigured}
                   type="submit"
                 >
                   Create Account

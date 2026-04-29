@@ -1,26 +1,15 @@
 # SESD-Project
 
 ## Project Overview
-This repository contains the SESD-Project, which includes various diagrams and documentation for software engineering and system design. The project aims to provide a comprehensive understanding of the system's architecture, use cases, and workflows.
-
-This workspace now includes a runnable front-end scaffold for the Intelligent Invigilation Management System (IIMS), plus a Supabase schema for the backend.
+This repository contains the SESD project for the Intelligent Invigilation Management System (IIMS). It includes a React + TypeScript front end, a Supabase schema for the backend, and submission-ready documentation in the `document/` folder.
 
 ## Repository Contents
 
-- **Classdiagram.md**: Contains the class diagram for the project, illustrating the relationships between classes.
-- **ERDiagram.md**: Includes the entity-relationship diagram, showcasing the database structure.
-- **Sequencediagram.md**: Details the sequence of interactions in the system.
-- **Usecasediagram.md**: Describes the use cases and their interactions.
-- **idea.md**: A document outlining the initial ideas and concepts for the project.
-- **document/**: Organized submission-ready documentation files:
-  - `addIdea.md`
-  - `Sequence Diagram.md`
-  - `Class Diagram.md`
-  - `Use Case Diagram.md`
-  - `ER Diagram.md`
-- **LICENSE**: The license file for the project.
-- **src/**: React + TypeScript front-end scaffold.
-- **supabase/schema.sql**: Database schema, triggers, and RLS policies.
+- `document/`: submission-ready diagrams and supporting notes.
+- `src/`: React application source.
+- `supabase/schema.sql`: database schema, triggers, and RLS policies.
+- `supabase/seed.sql`: optional sample data for local testing.
+- `idea.md`: project notes.
 
 ## How to Use
 1. Clone the repository:
@@ -34,20 +23,26 @@ This workspace now includes a runnable front-end scaffold for the Intelligent In
 3. Open the relevant files to explore the diagrams and documentation.
 
 ### Run the front-end
-1. Install dependencies: `npm install`
-2. Copy `.env.example` to `.env` and set:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_ANON_KEY`
-   - `VITE_ENABLE_DEMO_LOGIN` (`false` for production)
-3. Start the dev server: `npm run dev`
+1. Install dependencies with `npm install`.
+2. Copy `.env.example` to `.env`.
+3. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+4. Set `VITE_ENABLE_DEMO_LOGIN=false` for production deployments.
+5. Start the dev server with `npm run dev`.
 
 ### Production build
-1. Run `npm run build`
+1. Run `npm run build`.
 2. Deploy the generated `dist/` folder.
-3. For Vercel, keep `vercel.json` in the repo so SPA routes rewrite to `index.html`.
+3. For Vercel, keep `vercel.json` so SPA routes rewrite to `index.html`.
+4. Do not enable demo login in production.
+5. Run `npm run check` before every release to execute typecheck, tests, and build in sequence.
+
+### CI
+- GitHub Actions workflow: `.github/workflows/ci.yml`
+- Runs on each push to `main` and on pull requests.
+- Validates `npm ci`, `npm run typecheck`, `npm run test:run`, and `npm run build`.
 
 ### Sign up
-Use the Sign up link on the login screen to create instructor or admin accounts. Instructor sign-up will also create a linked instructor profile.
+Use the Sign up link on the login screen to create instructor or admin accounts. Instructor sign-up creates both the auth user and the linked instructor profile.
 
 ### Apply the database schema
 Run the SQL in [supabase/schema.sql](supabase/schema.sql) inside your Supabase SQL editor.
@@ -56,7 +51,7 @@ Run the SQL in [supabase/schema.sql](supabase/schema.sql) inside your Supabase S
 Run [supabase/seed.sql](supabase/seed.sql) after the schema to load sample instructors, exams, rooms, and a duty.
 
 ### Tests
-Run the utility tests with `npm run test`.
+Run the utility tests with `npm test -- --run`.
 
 ## License
 This project is licensed under the terms of the LICENSE file included in the repository.

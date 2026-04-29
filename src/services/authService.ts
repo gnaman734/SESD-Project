@@ -1,5 +1,5 @@
 import { Session } from "@supabase/supabase-js";
-import { supabase } from "../supabase/client";
+import { assertSupabaseConfigured, supabase } from "../supabase/client";
 import { User, UserRole } from "../types/domain";
 
 export class AuthService {
@@ -11,6 +11,8 @@ export class AuthService {
     department?: string;
     employeeCode?: string;
   }): Promise<User | null> {
+    assertSupabaseConfigured();
+
     const { data, error } = await supabase.auth.signUp({
       email: params.email,
       password: params.password,
@@ -60,7 +62,33 @@ export class AuthService {
     if (profileError) {
       throw profileError;
     }
+
+    const { error: metadataError } = await supabase.auth.updateUser({
+      data: {
+        full_name: params.fullName,
+        role: params.role,
+        instructor_id: instructorId,
+      },
+    });
+    if (metadataError) {
+      throw metadataError;
+    }
+
     return profile as User;
+  }
+
+  static async fetchUserProfile(userId: string): Promise<User | null> {
+    assertSupabaseConfigured();
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle();
+    if (error) {
+      throw error;
+    }
+    return (data as User | null) ?? null;
   }
 
   static mapSessionToUser(session: Session): User {
@@ -75,12 +103,19 @@ export class AuthService {
     };
   }
 
+  static async resolveUser(session: Session): Promise<User> {
+    const profile = await AuthService.fetchUserProfile(session.user.id);
+    return profile ?? AuthService.mapSessionToUser(session);
+  }
+
   static async getCurrentUser(): Promise<User | null> {
+    assertSupabaseConfigured();
+
     const { data } = await supabase.auth.getSession();
     const session = data.session;
     if (!session) {
       return null;
     }
-    return AuthService.mapSessionToUser(session);
+    return AuthService.resolveUser(session);
   }
 }

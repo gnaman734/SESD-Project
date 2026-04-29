@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "../supabase/client";
+import { AuthService } from "../services/authService";
 import { User, UserRole } from "../types/domain";
 
 export type AuthState = {
+  isReady: boolean;
   session: Session | null;
   user: User | null;
   role: UserRole | null;
@@ -11,10 +13,11 @@ export type AuthState = {
   logout: () => Promise<void>;
   setSession: (session: Session | null) => void;
   setUser: (user: User | null) => void;
+  setReady: (ready: boolean) => void;
 };
 
-export const useAuthStore = create<AuthState>(
-  (set: (partial: Partial<AuthState>) => void) => ({
+export const useAuthStore = create<AuthState>((set) => ({
+  isReady: false,
   session: null,
   user: null,
   role: null,
@@ -26,27 +29,23 @@ export const useAuthStore = create<AuthState>(
     if (error) {
       throw error;
     }
-    if (data.session) {
-      set({ session: data.session });
-      const profile = data.session.user.user_metadata as Partial<User>;
-      set({
-        user: {
-          id: data.session.user.id,
-          email: data.session.user.email ?? email,
-          full_name: profile.full_name ?? "",
-          role: (profile.role as UserRole) ?? UserRole.INSTRUCTOR,
-          instructor_id: profile.instructor_id ?? null,
-          created_at: data.session.user.created_at,
-        },
-        role: (profile.role as UserRole) ?? UserRole.INSTRUCTOR,
-      });
+    if (!data.session) {
+      throw new Error("Login succeeded, but no active session was returned.");
     }
+
+    const user = await AuthService.resolveUser(data.session);
+    set({
+      isReady: true,
+      session: data.session,
+      user,
+      role: user.role,
+    });
   },
   logout: async () => {
     await supabase.auth.signOut();
-    set({ session: null, user: null, role: null });
+    set({ isReady: true, session: null, user: null, role: null });
   },
   setSession: (session: Session | null) => set({ session }),
   setUser: (user: User | null) => set({ user, role: user?.role ?? null }),
-  })
-);
+  setReady: (isReady: boolean) => set({ isReady }),
+}));

@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthState, useAuthStore } from "../stores/authStore";
 import { UserRole } from "../types/domain";
+import { appEnv } from "../config/env";
 
 const LoginPage = () => {
   const login = useAuthStore((state: AuthState) => state.login);
@@ -11,9 +12,15 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const demoLoginEnabled = appEnv.enableDemoLogin;
+  const passwordLoginEnabled = appEnv.isSupabaseConfigured;
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (!passwordLoginEnabled) {
+      setError(appEnv.supabaseConfigurationMessage);
+      return;
+    }
     try {
       setError(null);
       await login(email, password);
@@ -135,28 +142,36 @@ const LoginPage = () => {
                 </div>
               </div>
               {error && <p className="text-xs text-error">{error}</p>}
+              {!passwordLoginEnabled ? (
+                <p className="text-xs text-on-surface-variant">
+                  Configure `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to enable password login.
+                </p>
+              ) : null}
               <button
-                className="primary-gradient w-full py-4 px-6 rounded-lg text-on-primary font-bold tracking-tight shadow-lg active:scale-[0.98] transition-transform duration-200"
+                className="primary-gradient w-full py-4 px-6 rounded-lg text-on-primary font-bold tracking-tight shadow-lg active:scale-[0.98] transition-transform duration-200 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={!passwordLoginEnabled}
                 type="submit"
               >
                 Login to Dashboard
               </button>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                <button
-                  className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
-                  onClick={() => handleDemoLogin(UserRole.INSTRUCTOR)}
-                  type="button"
-                >
-                  Demo as Instructor
-                </button>
-                <button
-                  className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
-                  onClick={() => handleDemoLogin(UserRole.ADMIN)}
-                  type="button"
-                >
-                  Demo as Admin
-                </button>
-              </div>
+              {demoLoginEnabled ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <button
+                    className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
+                    onClick={() => handleDemoLogin(UserRole.INSTRUCTOR)}
+                    type="button"
+                  >
+                    Demo as Instructor
+                  </button>
+                  <button
+                    className="w-full py-3 px-4 rounded-lg border border-outline-variant/30 text-on-surface text-sm font-semibold hover:bg-surface-container transition-colors"
+                    onClick={() => handleDemoLogin(UserRole.ADMIN)}
+                    type="button"
+                  >
+                    Demo as Admin
+                  </button>
+                </div>
+              ) : null}
             </form>
             <div className="mt-10 pt-8 border-t border-outline-variant/15 text-center">
               <p className="text-sm text-on-surface-variant font-medium">

@@ -167,9 +167,9 @@ begin
     variance_val := total_duties_val / avg_duties;
   end if;
 
-  if variance_val > 1.2 then
+  if variance_val >= 1.2 then
     status_val := 'overloaded';
-  elsif variance_val < 0.8 then
+  elsif variance_val <= 0.8 then
     status_val := 'underutilized';
   else
     status_val := 'balanced';
@@ -260,13 +260,13 @@ create policy "Admins full access" on duties
   for all using (auth.jwt() ->> 'role' = 'admin');
 
 create policy "Instructors read own duties" on duties
-  for select using (instructor_id::text = auth.uid()::text);
+  for select using (instructor_id::text = (auth.jwt() ->> 'instructor_id'));
 
 create policy "Instructors update own duties" on duties
-  for update using (instructor_id::text = auth.uid()::text);
+  for update using (instructor_id::text = (auth.jwt() ->> 'instructor_id'));
 
 create policy "Admins full access" on analytics_cache
   for all using (auth.jwt() ->> 'role' = 'admin');
 
 create policy "Instructors read own cache" on analytics_cache
-  for select using (instructor_id::text = auth.uid()::text);
+  for select using (instructor_id::text = (auth.jwt() ->> 'instructor_id'));

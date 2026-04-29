@@ -24,10 +24,10 @@ export class WorkloadUtil {
       return WorkloadStatus.BALANCED;
     }
     const ratio = totalDuties / average;
-    if (ratio > WorkloadUtil.OVERLOAD_THRESHOLD) {
+    if (ratio >= WorkloadUtil.OVERLOAD_THRESHOLD) {
       return WorkloadStatus.OVERLOADED;
     }
-    if (ratio < WorkloadUtil.UNDERUTILIZE_THRESHOLD) {
+    if (ratio <= WorkloadUtil.UNDERUTILIZE_THRESHOLD) {
       return WorkloadStatus.UNDERUTILIZED;
     }
     return WorkloadStatus.BALANCED;
